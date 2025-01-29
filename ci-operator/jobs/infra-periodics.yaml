@@ -1093,9 +1093,6 @@ periodics:
   - base_ref: main
     org: openshift
     repo: operator-framework-operator-controller
-  - base_ref: main
-    org: openshift
-    repo: operator-framework-catalogd
   labels:
     pj-rehearse.openshift.io/can-be-rehearsed: "true"
   name: periodic-auto-olm-v1-downstreaming
@@ -1291,6 +1288,9 @@ periodics:
       - --github-graphql-endpoint=http://ghproxy/graphql
       - --github-hourly-tokens=10000
       - --github-disabled-org=openshift
+      - --github-client.max-retries=10
+      - --github-client.max-404-retries=3
+      - --github-client.initial-delay=5s
       command:
       - /ko-app/branchprotector
       env:
